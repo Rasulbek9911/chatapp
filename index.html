@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>chatapp</title>
+</head>
+<body>
+  <div class="bosh ">
+    <h1>chatapp</h1>
+
+  </div>
+    <div class="container mt-5">
+        <div class="row">
+          <div class="col-sm-6">
+             
+              <label for="usr">Name:</label>
+              <input type="text" class="form-control" id="usr" placeholder="your name:">
+           
+              <label for="textarea"> Massage:</label>
+              <textarea class="form-control" rows="5" id="text" ></textarea>
+            
+            <button class="btn btn-primary btn-block" type="submit" id="btn" onclick="jonatish()">jo'natish </button>
+            
+          </div>
+          <div class="col-sm-6">
+            <h3>Yozishmalar:</h3>
+            <div id="result"></div>
+          </div>
+          </div>
+          </div>
+          <script>
+function jonatish(){
+    
+    var input=document.getElementById('usr');
+    var textarea=document.getElementById('text');
+    var Yozishmalar=document.getElementById('result');
+     
+    result.textContent=`${usr.value}:` `${text.value}`;
+
+
+} 
+          </script>
+          
+          <script src="/socket.io/socket.io.js"></script>
+         
+<script> function nimadir(){
+  var socket=io.connect();
+ 
+    
+
+
+}</script>
+        
+         
+         
+        
+
+</body>
+</html>
