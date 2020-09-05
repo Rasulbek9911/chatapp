@@ -28,31 +28,34 @@
             <h3>Yozishmalar:</h3>
             <div id="result"></div>
           </div>
-          </div>
-          </div>
-          <script>
+        </div>
+      </div>
+      <script src="/socket.io/socket.io.js"></script>
+              <script>
+            const socket=io.connect();
+
+              </script>
+              <script>
 function jonatish(){
     
     var input=document.getElementById('usr');
     var textarea=document.getElementById('text');
     var Yozishmalar=document.getElementById('result');
      
-    result.textContent=`${usr.value}:` `${text.value}`;
-
-
-} 
-          </script>
-          
-          <script src="/socket.io/socket.io.js"></script>
-         
-<script> function nimadir(){
-  var socket=io.connect();
- 
+    Yozishmalar.textContent=input.value+":=>"+  textarea.value;
     
+  };
+  socket.on('add mess', function(data){
+  var div=document.createElement("div");
+  div.innerHTML=data;
+  document.body.appendChild(div);
+socket.emit('add mess',input.value+":=>   "+  textarea.value )
+});
 
+</script>
 
-}</script>
-        
+          
+         
          
          
         
