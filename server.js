@@ -1,7 +1,6 @@
 const express=require('express');
+const { Socket } = require('dgram');
 const app=express();
-const path=require('path');
-const http=require('http');
 const server=require('http').createServer(app);
 const io=require('socket.io').listen(server);
 
@@ -16,7 +15,8 @@ app.get('/', function(req, res){
 users=[];
 connections=[];
 
-io.on('connection', function(socket){
+
+io.sockets.on('connection', function(socket){
     console.log("New connection");
     connections.push(socket);
     
@@ -25,7 +25,7 @@ socket.on('disconnect', function(data){
     connections.splice(connections.indexOf(socket), 1);
     console.log("Diconnect");
 });
+socket.on('send mess', function(data){
+    io.sockets.emit('add mess', {mess: data.mess, name: data.name, classname: data.classname});
 });
-
-
-
+});

@@ -11,6 +11,7 @@
     <h1>chatapp</h1>
 
   </div>
+  <form id="messform">
     <div class="container mt-5">
         <div class="row">
           <div class="col-sm-6">
@@ -30,35 +31,63 @@
           </div>
         </div>
       </div>
+    </form>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
-              <script>
-            const socket=io.connect();
+      <script>
 
-              </script>
-              <script>
-function jonatish(){
-    
-    var input=document.getElementById('usr');
-    var textarea=document.getElementById('text');
-    var Yozishmalar=document.getElementById('result');
-     
-    Yozishmalar.textContent=input.value+":=>"+  textarea.value;
-    
-  };
-  socket.on('add mess', function(data){
-  var div=document.createElement("div");
-  div.innerHTML=data;
-  document.body.appendChild(div);
-socket.emit('add mess',input.value+":=>   "+  textarea.value )
+var min=1; 
+var max=6;
+var random=Math.floor(Math.random()*(max-min))+min;
+var alertclass; 
+switch(random){
+  case 1:
+    alertclass='secondary';
+    break;
+    case 2:
+    alertclass='danger';
+    break;
+    case 3:
+    alertclass='success';
+    break;
+    case 4:
+    alertclass='warning';
+    break;
+    case 5:
+    alertclass='info';
+    break;
+    case 6:
+    alertclass='light';
+    break;
+}
+
+
+
+
+
+
+
+        $(function(){
+            const socket=io.connect();
+     var $form=$("#messform");
+     var $name=$("#usr");
+     var $massage=$("#text");
+     var $yozishmalar=$("#result");
+
+ $form.submit(function(event){
+   event.preventDefault();
+   socket.emit('send mess', {mess: $massage.val(), name: $name.val(),classname:alertclass});
+   $massage.val('');
+ });
+ socket.on('add mess', function(data){
+    $yozishmalar.append("<div class='alert alert-"+data.classname +"' ><b>" + data.name + "</b>:"+ data.mess + "</div>");
 });
 
-</script>
 
-          
-         
-         
+
+        })
+              </script>
          
         
-
 </body>
 </html>
